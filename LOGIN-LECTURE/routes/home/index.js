@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render("home/index");
-});
-router.get('/login', (req, res) => {
-    res.render('home/login');
-});
+const ctrl = require('./home.ctrl')
+
+router.get('/', ctrl.home);
+router.get('/login', ctrl.login);
 
 module.exports = router; // 리덕스나 리엑트를 쓸때 export하는것과 똑같은것
