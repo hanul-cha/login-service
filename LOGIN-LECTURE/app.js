@@ -1,35 +1,17 @@
-const http = require('http');
-const app = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': "text/html; charset=utf-8" });
-    if (req.url === '/') {
-        res.end('여기는 루트입니다');
-    } else if (req.url === '/login') {
-        res.end('여기는 로그인 화면입니다');
-    }
+
+const express = require("express");
+const app = express();
+
+app.set('views', './views');// 두번째 파라미터는 뷰로 연결해줄 파일이름으로 넣어준다
+app.set('view engine', 'ejs');//뷰엔진으로 ejs를 사용한다는뜻 html과 비슷한환경
+
+
+app.get('/', (req, res) => {
+    res.render("home/index");
 });
-
-app.listen(3001, () => {
-    console.log('http로 가동된 서버입니다.');
+app.get('/login', (req, res) => {
+    res.render('home/login');
+})
+app.listen(3000, () => {
+    console.log('서버가동');
 });
-
-/* 
-express와 달리 헤더에 타입을 전달해주어야 한글로 볼수 있음
-*/
-
-
-
-
-// const express = require("express");
-// const app = express();
-
-// app.get('/', (req, res) => {
-//     res.send('여기는 루트 입니다.');
-// });
-
-// app.get('/login', (req, res) => {
-//     res.send('여기는 로그인 화면입니다');
-// })
-
-// app.listen(3000, () => {
-//     console.log('서버가동');
-// });
