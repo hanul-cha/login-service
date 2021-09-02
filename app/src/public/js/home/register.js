@@ -21,7 +21,7 @@ function register() {
         psword: psword.value,
         confirmPsword: confirmPsword.value,
     };
-    console.log(req);
+    
 
     fetch('/register', {
         method: "POST",
