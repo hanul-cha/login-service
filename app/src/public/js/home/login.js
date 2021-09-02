@@ -1,5 +1,5 @@
 const id = document.querySelector("#id"),
-    psword = document.querySelector("#pasword"),
+    psword = document.querySelector("#psword"),
     loginBtn = document.querySelector("button");
 
 
