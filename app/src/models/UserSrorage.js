@@ -1,8 +1,8 @@
 class UserStorage {
     static #users = {//스태틱을 사용해서 정적 변수로 만들어주면 new같은 인스턴스를 만들지 않아도 접근이 가능하다
-        id: ["ckgksdnf", "ansdlswn", "rlatjsals"],
-        psword: ["1234", "1234", "12345"],
-        name: ['한울', '인주', '선민']
+        id: ["ckgksdnf", "ansdlswn", "rlatjsals", "ghkdwlsgur"],
+        psword: ["1234", "1234", "12345", "123456"],
+        name: ['한울', '인주', '선민', '진혁']
     };
 
     static getUsers(...fields) {//이 스프레드변수엔 전달해준 파라미터들을 전부 배열로 가져온다
@@ -25,6 +25,14 @@ class UserStorage {
         }, {});
 
         return userInfo;
+    }
+
+    static save(userInfo) {
+        const user = this.#users;
+        user.id.push(userInfo.id);
+        user.name.push(userInfo.name);
+        user.psword.push(userInfo.psword);
+        return { success: true };
     }
 }
 
