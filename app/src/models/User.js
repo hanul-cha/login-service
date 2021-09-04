@@ -6,9 +6,9 @@ class User {
         this.body = body; // input에 입력한 값들
     }
 
-    login() {
+    async login() {
         const client = this.body;
-        const { id, psword } = UserStorage.getUserInfo(client.id);//여기의 배열은 userStorage에 저장된 유저들 내용
+        const { id, psword } = await UserStorage.getUserInfo(client.id);//여기의 배열은 userStorage에 저장된 유저들 내용
         
         if (id) {
             if ( id === client.id && psword === client.psword ){

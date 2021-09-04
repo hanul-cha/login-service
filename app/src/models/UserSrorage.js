@@ -1,12 +1,22 @@
+
+const fs = require('fs').promises;
+
 class UserStorage {
-    static #users = {//스태틱을 사용해서 정적 변수로 만들어주면 new같은 인스턴스를 만들지 않아도 접근이 가능하다
-        id: ["ckgksdnf", "ansdlswn", "rlatjsals", "ghkdwlsgur"],
-        psword: ["1234", "1234", "12345", "123456"],
-        name: ['한울', '인주', '선민', '진혁']
-    };
+
+    static #getUserinfo(data, id) {
+        const users = (JSON.parse(data));
+        const idx = users.id.indexOf(id);
+        const userInfo = Object.keys(users).reduce((newUser, info) => {
+            newUser[info] = users[info][idx];
+            return newUser;
+        }, {});
+
+        return userInfo;
+    }
+    
 
     static getUsers(...fields) {//이 스프레드변수엔 전달해준 파라미터들을 전부 배열로 가져온다
-        const users = this.#users;
+        /* const users = this.#users; */
         const newUsers = fields.reduce((newUsers, field) => {
             if(users.hasOwnProperty(field)){
                 newUsers[field] = users[field];
@@ -17,18 +27,16 @@ class UserStorage {
     }
 
     static getUserInfo(id) { 
-        const users = this.#users;
-        const idx = users.id.indexOf(id);
-        const userInfo = Object.keys(users).reduce((newUser, info) => {
-            newUser[info] = users[info][idx];
-            return newUser;
-        }, {});
-
-        return userInfo;
+        return fs
+            .readFile("./src/databases/user.json")
+            .then((data) => {
+                return this.#getUserinfo(data, id);
+            })
+            .catch(console.error);
     }
 
     static save(userInfo) {
-        const user = this.#users;
+        /* const user = this.#users; */
         user.id.push(userInfo.id);
         user.name.push(userInfo.name);
         user.psword.push(userInfo.psword);
