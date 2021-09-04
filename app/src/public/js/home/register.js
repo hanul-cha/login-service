@@ -37,6 +37,7 @@ function register() {
     .then((res) => res.json())//프라미스로 반환됨 그래서 아래에 then을 한번더 불러줌
     .then((res) => {
         if(res.success) {
+            alert("회원가입이 완료 되었습니다.");
             location.href = '/login';
         } else {
             alert(res.msg);
