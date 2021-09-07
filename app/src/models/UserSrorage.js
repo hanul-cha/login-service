@@ -1,5 +1,5 @@
 
-const fs = require('fs').promises;
+const db = require("../config/db");
 
 class UserStorage {
 
@@ -30,33 +30,16 @@ class UserStorage {
 
     static getUsers(isAll, ...fields) {//이 스프레드변수엔 전달해준 파라미터들을 전부 배열로 가져온다
         
-        return fs
-            .readFile("./src/databases/user.json")
-            .then((data) => {
-                return this.#getUsers(data, isAll, fields);
-            })
-            .catch(console.error);
     }
 
     static getUserInfo(id) { 
-        return fs
-            .readFile("./src/databases/user.json")
-            .then((data) => {
-                return this.#getUserinfo(data, id);
-            })
-            .catch(console.error);
+        db.query("SELECT * FROM users", (err, data) => {
+            console.log(data);
+        })
     }
 
     static async save(userInfo) {
-        const users = await this.getUsers(true);
-        if (users.id.includes(userInfo.id)) {
-            throw "이미 존재하는 아이디 입니다"
-        }
-        users.id.push(userInfo.id);
-        users.name.push(userInfo.name);
-        users.psword.push(userInfo.psword);
-        fs.writeFile("./src/databases/user.json", JSON.stringify(users));
-        return { success: true };
+        
     }
 }
 
