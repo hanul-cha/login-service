@@ -30,7 +30,3 @@ function login() {
         console.error('로그인중 에러 발생');
     })
 }
-
-
-
-
