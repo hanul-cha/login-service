@@ -9,7 +9,7 @@ class User {
     async login() {
         const client = this.body;
         const { id, psword } = await UserStorage.getUserInfo(client.id);//여기의 배열은 userStorage에 저장된 유저들 내용
-        
+        console.log(client.psword, psword, client.id, id);
         if (id) {
             if ( id === client.id && psword === client.psword ){
                 return { success: true };
