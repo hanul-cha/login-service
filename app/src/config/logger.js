@@ -8,12 +8,12 @@ const printFormat = printf(({ timestamp, label, level, message }) => {
 const printLogFormat = {
   file: combine(
     label({
-      label: "백엔드 맛보기",
+      label: "서버 관리 해보기!",
     }),
     timestamp({
       format: "YYYY-MM-DD HH:mm:dd",
     }),
-    printFormat
+    printFormat // 마지막으로 보내주는 파라미터가 출력 포멧이 됨
   ),
   console: combine(
     colorize(), //

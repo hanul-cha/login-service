@@ -19,6 +19,9 @@ const accessLogStream = fs.createWriteStream(
     { flags: "a" }
 );
 
+const logger = require("./src/config/logger");
+logger.info("hi");
+
 // 앱 세팅
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
